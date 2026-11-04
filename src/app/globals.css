@@ -1,0 +1,281 @@
+/* ============ Token desain ============ */
+:root {
+  --bg: #fff7e6;
+  --ink: #3b2a1a;
+  --muted: #7a6a58;
+  --card: #ffffff;
+  --ok: #2fb344;
+  --ok-soft: #d3f9d8;
+  --bad: #e5484d;
+  --bad-soft: #ffe3e3;
+  --accent: #4c6ef5;
+  --soft: #eef1ff;
+  --shadow: 0 6px 0 rgba(0, 0, 0, 0.12);
+  --shadow-press: 0 3px 0 rgba(0, 0, 0, 0.12);
+  --radius: 18px;
+  --maxw: 880px;
+  --safe-t: env(safe-area-inset-top, 0px);
+  --safe-b: env(safe-area-inset-bottom, 0px);
+  --safe-l: env(safe-area-inset-left, 0px);
+  --safe-r: env(safe-area-inset-right, 0px);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-display), "Comic Sans MS", "Trebuchet MS", system-ui, sans-serif;
+  font-size: 17px;
+  line-height: 1.35;
+  padding: 0 var(--safe-r) var(--safe-b) var(--safe-l);
+  overscroll-behavior-y: none;
+}
+
+h1, h2, p { margin: 0; }
+a { color: inherit; }
+button { font: inherit; color: inherit; }
+img, svg { max-width: 100%; }
+
+/* ============ Kerangka halaman ============ */
+.page {
+  width: 100%;
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: max(70px, calc(var(--safe-t) + 66px)) 16px 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.gamepage {
+  width: 100%;
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: max(14px, var(--safe-t)) 16px 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.screen { display: flex; flex-direction: column; gap: 14px; }
+.screen.result { text-align: center; align-items: stretch; }
+.screen.play { position: relative; }
+
+.backlink {
+  display: inline-flex; align-items: center; min-height: 44px; align-self: flex-start;
+  font-weight: 700; text-decoration: none; padding-right: 64px;
+}
+.gametitle { text-align: center; font-size: clamp(26px, 6vw, 40px); line-height: 1.1; }
+.sub { text-align: center; color: var(--muted); }
+.group-title { font-weight: 800; margin-top: 4px; }
+.best { text-align: center; color: var(--muted); }
+.error { color: var(--bad); font-weight: 700; }
+.big-emoji { font-size: 1.8em; display: block; line-height: 1.1; }
+
+/* ============ Tombol ============ */
+.btn, .pick, .quit, .toggle {
+  border: 0;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: var(--shadow);
+  min-height: 48px;
+  padding: 12px 16px;
+  cursor: pointer;
+  touch-action: manipulation;
+  transition: transform 0.08s, filter 0.15s;
+}
+.btn { font-weight: 800; text-align: center; text-decoration: none; display: inline-flex; align-items: center; justify-content: center; gap: 8px; }
+.btn.primary { background: var(--accent); color: #fff; }
+.btn.ok { background: var(--ok); color: #fff; }
+.btn.xl { font-size: 1.25em; padding: 16px; }
+.btn:disabled { opacity: 0.5; cursor: not-allowed; }
+.btn:active, .pick:active, .quit:active, .choice:active { transform: translateY(3px); box-shadow: var(--shadow-press); }
+@media (hover: hover) {
+  .btn:hover:not(:disabled), .pick:hover, .choice:hover:not(:disabled) { filter: brightness(1.05); }
+}
+
+.pickgrid { display: grid; gap: 10px; }
+.pickgrid.levels { grid-template-columns: repeat(2, 1fr); }
+.pickgrid.cats { grid-template-columns: repeat(auto-fit, minmax(96px, 1fr)); }
+.pick { border: 3px solid transparent; text-align: left; }
+.pick b { display: block; font-size: 1.05em; }
+.pick small { display: block; color: var(--muted); margin-top: 2px; }
+.pick.cat { text-align: center; }
+.pick.sel { border-color: var(--accent); background: var(--soft); }
+.pick.locked { opacity: 0.75; }
+
+.toggle {
+  display: flex; align-items: center; gap: 10px; font-weight: 700; line-height: 1.3; cursor: pointer;
+}
+.toggle input { width: 24px; height: 24px; flex: none; accent-color: var(--accent); }
+
+.row { display: flex; gap: 10px; flex-wrap: wrap; }
+.row > .btn { flex: 1 1 140px; }
+
+.quit {
+  position: absolute; top: -4px; left: 0; z-index: 5; padding: 8px 14px; min-height: 44px; font-weight: 800; font-size: 0.9em;
+}
+.screen.play > :nth-child(2) { margin-top: 40px; }
+
+/* ============ Komponen permainan ============ */
+.roundbar { display: flex; justify-content: space-between; font-weight: 800; font-size: 1.1em; }
+.timerbar { height: 14px; background: rgba(0, 0, 0, 0.08); border-radius: 99px; overflow: hidden; }
+.timerbar i { display: block; height: 100%; background: var(--accent); transition: width 0.25s linear; }
+.timerbar.warn i { background: var(--bad); }
+.msg { text-align: center; font-weight: 800; font-size: 1.2em; min-height: 1.6em; }
+.ask {
+  text-align: center; font-size: clamp(20px, 5.5vw, 30px); font-weight: 800;
+  background: #fff; border-radius: var(--radius); padding: 10px; box-shadow: var(--shadow);
+}
+.panel { background: #fff; border-radius: 22px; box-shadow: var(--shadow); padding: 18px; }
+.stage {
+  background: #fff; border-radius: 22px; box-shadow: var(--shadow); padding: 16px; min-height: 150px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; text-align: center;
+}
+
+.stars { font-size: 3em; letter-spacing: 6px; text-align: center; }
+.bigscore { font-size: 2.4em; font-weight: 800; }
+
+/* pilihan ganda bersama */
+.choices { display: grid; grid-template-columns: repeat(var(--cols, 3), minmax(0, 1fr)); gap: 10px; }
+@media (max-width: 480px) { .choices { grid-template-columns: repeat(min(var(--cols, 3), 3), minmax(0, 1fr)); } }
+.choice {
+  border: 0; border-radius: 16px; background: #fff; box-shadow: var(--shadow); padding: 10px 4px; cursor: pointer;
+  font-size: clamp(36px, 10vw, 56px); line-height: 1.1; font-weight: 800; touch-action: manipulation;
+  transition: transform 0.08s; min-height: 64px;
+}
+.choice small { display: block; font-size: 0.28em; text-transform: uppercase; margin-top: 2px; }
+.choice.ok { background: var(--ok-soft); outline: 4px solid var(--ok); }
+.choice.no { background: var(--bad-soft); outline: 4px solid var(--bad); }
+.choices.lock .choice { pointer-events: none; }
+
+/* ============ Dialog & pelindung orang tua ============ */
+.overlay {
+  position: fixed; inset: 0; z-index: 100; background: rgba(30, 20, 10, 0.55);
+  display: flex; align-items: center; justify-content: center; padding: 16px;
+}
+.dialog { max-width: 420px; width: 100%; display: flex; flex-direction: column; gap: 12px; text-align: center; }
+.gate { max-width: 420px; margin: 0 auto; width: 100%; display: flex; flex-direction: column; gap: 12px; text-align: center; }
+.gateq { font-size: 2.2em; font-weight: 800; }
+.gateinput {
+  font: inherit; font-size: 1.6em; text-align: center; padding: 10px; border-radius: 14px; border: 3px solid #d9cdb8; width: 100%;
+}
+
+/* ============ Tombol musik / pengaturan global ============ */
+.fab {
+  position: fixed; top: max(10px, var(--safe-t)); right: max(10px, var(--safe-r)); z-index: 90;
+  display: flex; gap: 8px;
+}
+.fab button {
+  width: 48px; height: 48px; border-radius: 50%; border: 0; background: #fff; box-shadow: 0 4px 0 rgba(0, 0, 0, 0.15);
+  font-size: 22px; cursor: pointer; padding: 0; touch-action: manipulation;
+}
+
+/* ============ Layar lebar / pendek ============ */
+@media (max-width: 400px) {
+  .page, .gamepage { padding-left: 12px; padding-right: 12px; }
+  .pickgrid.levels { grid-template-columns: repeat(2, 1fr); }
+}
+@media (min-width: 1100px) { body { font-size: 18px; } :root { --maxw: 980px; } }
+@media (max-height: 520px) and (orientation: landscape) {
+  .page { padding-top: 56px; }
+  .gamepage, .screen, .page { gap: 8px; }
+  .gametitle { font-size: 24px; }
+  .sub { display: none; }
+  .stage { min-height: 0; padding: 8px; }
+  .choice { font-size: 34px; padding: 6px 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+}
+:focus-visible { outline: 4px solid var(--accent); outline-offset: 2px; }
+
+/* ============ Beranda ============ */
+.gamegrid { display: grid; grid-template-columns: 1fr; gap: 14px; }
+@media (min-width: 700px) { .gamegrid { grid-template-columns: repeat(2, 1fr); gap: 18px; } }
+.gamecard {
+  display: flex; align-items: center; gap: 16px; text-decoration: none; border-radius: 22px; padding: 18px;
+  box-shadow: 0 7px 0 rgba(0, 0, 0, 0.14); border: 3px solid transparent; transition: transform 0.08s, border-color 0.15s;
+  touch-action: manipulation; min-height: 96px;
+}
+.gamecard:active { transform: translateY(4px); box-shadow: 0 3px 0 rgba(0, 0, 0, 0.14); }
+@media (hover: hover) { .gamecard:hover { border-color: var(--accent); } }
+.gamecard b { font-size: 1.3em; display: block; line-height: 1.15; }
+.gamecard small { color: var(--muted); font-size: 0.95em; }
+.gc-emoji { font-size: clamp(46px, 13vw, 64px); line-height: 1; flex: none; }
+.footnav { display: flex; gap: 18px; justify-content: center; flex-wrap: wrap; margin-top: 8px; }
+.footnav a { font-weight: 700; padding: 10px 6px; min-height: 44px; display: inline-flex; align-items: center; }
+
+/* ============ Profil ============ */
+.profilebar { display: flex; }
+.profilebtn { text-align: left; gap: 12px; padding: 8px 16px 8px 10px; }
+.profilebtn b { display: block; line-height: 1.1; }
+.profilebtn small { color: var(--muted); font-weight: 700; }
+.avatar-lg { font-size: 2em; line-height: 1; }
+.avatars { display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px; }
+.avatar {
+  font-size: 1.8em; border: 3px solid transparent; border-radius: 14px; background: #fff; box-shadow: var(--shadow);
+  cursor: pointer; padding: 4px 0; min-height: 52px;
+}
+.avatar.sel { border-color: var(--accent); background: var(--soft); }
+.profileform { display: flex; flex-direction: column; gap: 12px; width: 100%; text-align: left; }
+.profilelist { display: flex; flex-direction: column; gap: 8px; width: 100%; }
+.profilelist .btn { justify-content: flex-start; }
+
+/* ============ Area orang tua ============ */
+.prose { display: flex; flex-direction: column; gap: 12px; }
+.prose h2 { font-size: 1.3em; margin-top: 10px; }
+.prose p, .prose li { line-height: 1.5; }
+.prose ul { margin: 0; padding-left: 1.2em; display: flex; flex-direction: column; gap: 6px; }
+.stat { display: flex; justify-content: space-between; gap: 12px; align-items: center; }
+.bar-track { height: 12px; background: rgba(0, 0, 0, 0.08); border-radius: 99px; overflow: hidden; flex: 1; }
+.bar-fill { height: 100%; background: var(--ok); border-radius: 99px; }
+.stack { display: flex; flex-direction: column; gap: 12px; }
+.chip { display: inline-block; background: var(--ok-soft); color: #1b6b29; font-weight: 800; border-radius: 99px; padding: 2px 10px; font-size: 0.85em; }
+.plans { display: grid; gap: 12px; grid-template-columns: 1fr; }
+@media (min-width: 700px) { .plans { grid-template-columns: repeat(3, 1fr); } }
+.plan { text-align: center; display: flex; flex-direction: column; gap: 8px; align-items: center; }
+.plan .price { font-size: 1.6em; font-weight: 800; }
+.danger { background: var(--bad); color: #fff; }
+
+/* ============ Bidang belajar & misi harian ============ */
+.area { display: flex; flex-direction: column; gap: 12px; margin-top: 10px; }
+.area-head { display: flex; align-items: center; gap: 12px; border-bottom: 4px solid var(--accent); padding-bottom: 8px; }
+.area-head h2 { font-size: 1.4em; line-height: 1.1; }
+.area-head p { color: var(--muted); font-size: 0.9em; }
+.area-emoji { font-size: 2em; line-height: 1; }
+
+.mission { display: flex; flex-direction: column; gap: 10px; }
+.mission-head { display: flex; justify-content: space-between; align-items: center; }
+.mission-head h2 { font-size: 1.3em; }
+.mission-win { font-weight: 800; color: #1b6b29; }
+.mission-list { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.mission-card {
+  display: flex; flex-direction: column; align-items: center; text-align: center; gap: 2px; text-decoration: none;
+  border-radius: 16px; padding: 12px 6px; min-height: 120px; justify-content: center; border: 3px solid transparent;
+  box-shadow: var(--shadow); touch-action: manipulation;
+}
+.mission-card:active { transform: translateY(3px); box-shadow: var(--shadow-press); }
+@media (hover: hover) { .mission-card:hover { border-color: var(--accent); } }
+.mission-card b { font-size: 0.95em; line-height: 1.15; }
+.mission-card small { color: var(--muted); font-size: 0.78em; }
+.mc-emoji { font-size: 2.2em; line-height: 1; }
+@media (max-width: 380px) { .mission-list { grid-template-columns: 1fr; } .mission-card { flex-direction: row; min-height: 64px; justify-content: flex-start; padding: 10px 14px; gap: 10px; } }
+
+/* kolom isian di area orang tua */
+.panel input[type="email"], .panel input[inputmode="numeric"] {
+  font: inherit; padding: 12px; border-radius: 14px; border: 3px solid #d9cdb8; width: 100%; background: #fff;
+}
+.panel label.stack { gap: 6px; font-weight: 700; }

@@ -1,0 +1,48 @@
+.sides {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+.lockd .side { pointer-events: none; }
+
+.side.side {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: 150px;
+  padding: 12px 6px;
+  font-size: 16px;
+}
+
+/* kisi 5 kolom supaya mudah dihitung */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 2px;
+  font-size: clamp(20px, 6.2vw, 30px);
+  line-height: 1.15;
+  font-weight: 400;
+}
+.num {
+  font-size: clamp(48px, 15vw, 80px);
+  line-height: 1;
+  color: var(--accent);
+}
+.expr {
+  font-size: clamp(28px, 8vw, 46px);
+  line-height: 1.1;
+  color: var(--accent);
+  white-space: nowrap;
+}
+.result {
+  font-size: 22px;
+  font-weight: 800;
+  min-height: 1.3em;
+}
+
+.samebad.samebad {
+  background: var(--bad-soft);
+  outline: 4px solid var(--bad);
+}

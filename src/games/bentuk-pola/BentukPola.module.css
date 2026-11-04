@@ -1,0 +1,96 @@
+.target {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+}
+
+.seq {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px;
+  max-width: 100%;
+}
+
+.qcell {
+  width: 44px;
+  height: 44px;
+  border: 3px dashed var(--accent);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--accent);
+  background: var(--soft);
+}
+
+.prompt {
+  font-size: clamp(18px, 5vw, 24px);
+  font-weight: 800;
+}
+
+.replay {
+  background: var(--accent);
+  color: #fff;
+  padding: 10px 20px;
+}
+
+.opts {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(var(--cols, 3), minmax(0, 1fr));
+}
+
+@media (max-width: 480px) {
+  .opts.col1m {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .opts.c4 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.opts .opt {
+  min-height: 72px;
+  min-width: 48px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  font-size: clamp(18px, 5vw, 26px);
+  padding: 10px 6px;
+  overflow-wrap: anywhere;
+}
+
+.opts .opt:focus-visible {
+  outline: 4px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.opts .opt .emoji {
+  font-size: clamp(40px, 12vw, 56px);
+  line-height: 1;
+}
+
+.opts .opt small {
+  font-size: 14px;
+  text-transform: none;
+  font-weight: 800;
+}
+
+.shapeBox {
+  width: 84px;
+  height: 84px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.novoice {
+  font-size: 0.9em;
+  color: var(--muted);
+}

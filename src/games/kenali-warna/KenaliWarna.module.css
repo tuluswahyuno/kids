@@ -1,0 +1,147 @@
+.prompt {
+  font-size: clamp(18px, 5vw, 26px);
+  font-weight: 800;
+}
+
+.replay {
+  background: var(--accent);
+  color: #fff;
+  padding: 10px 20px;
+}
+
+.bigSwatch {
+  width: clamp(110px, 38vw, 170px);
+  height: clamp(80px, 26vw, 120px);
+  border-radius: 20px;
+  border: 4px solid #3b2f2f;
+}
+
+.objEmoji {
+  font-size: clamp(64px, 20vw, 100px);
+  line-height: 1;
+}
+
+.hearEmoji {
+  font-size: clamp(56px, 16vw, 80px);
+  line-height: 1;
+}
+
+.opts {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(var(--cols, 3), minmax(0, 1fr));
+}
+
+@media (max-width: 480px) {
+  .opts.c4 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.opts .opt {
+  min-height: 72px;
+  min-width: 48px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 10px 8px;
+  font-size: clamp(18px, 5vw, 26px);
+  overflow-wrap: anywhere;
+}
+
+.opts .opt:focus-visible {
+  outline: 4px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.opts .opt small {
+  font-size: 15px;
+  text-transform: none;
+  font-weight: 800;
+  min-height: 1.2em;
+}
+
+.swatch {
+  display: block;
+  width: 100%;
+  height: clamp(52px, 15vw, 80px);
+  border-radius: 12px;
+  border: 3px solid #3b2f2f;
+}
+
+.textOpt {
+  font-weight: 800;
+}
+
+/* ---- campur warna ---- */
+.mix {
+  --ball: clamp(52px, 16vw, 72px);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 6px;
+  max-width: 100%;
+}
+
+.mixCol {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  min-width: var(--ball);
+}
+
+.mixCol small {
+  font-weight: 800;
+  font-size: 14px;
+}
+
+.ball {
+  width: var(--ball);
+  height: var(--ball);
+  border-radius: 50%;
+  border: 3px solid #3b2f2f;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  font-weight: 800;
+}
+
+.unknown {
+  background: var(--soft);
+  border-style: dashed;
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.op {
+  font-size: 28px;
+  font-weight: 800;
+  line-height: var(--ball);
+  height: var(--ball);
+}
+
+.ballA {
+  animation: meetA 1.4s ease-in-out infinite alternate;
+}
+
+.ballB {
+  animation: meetB 1.4s ease-in-out infinite alternate;
+}
+
+@keyframes meetA {
+  from { transform: translateX(-10px); }
+  to { transform: translateX(14px); }
+}
+
+@keyframes meetB {
+  from { transform: translateX(10px); }
+  to { transform: translateX(-14px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ballA, .ballB { animation: none; }
+}

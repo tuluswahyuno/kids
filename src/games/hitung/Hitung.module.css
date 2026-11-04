@@ -1,0 +1,64 @@
+/* digandakan agar lebih spesifik daripada .stage global (kolom) */
+.board.board {
+  flex-direction: row;
+  flex-wrap: wrap;
+  min-height: 150px;
+}
+
+.grp {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  justify-content: center;
+  max-width: 320px;
+}
+
+.obj {
+  position: relative;
+  font-size: clamp(34px, 10vw, 52px);
+  line-height: 1;
+  padding: 2px;
+  border: 0;
+  background: transparent;
+  cursor: default;
+}
+.countable { cursor: pointer; touch-action: manipulation; border-radius: 12px; }
+.countable:focus-visible { outline: 4px solid var(--accent); }
+.hop { animation: hop 0.35s; }
+.badge {
+  position: absolute;
+  right: -4px;
+  top: -8px;
+  font-size: 0.4em;
+  font-weight: 800;
+  background: var(--accent);
+  color: #fff;
+  border-radius: 99px;
+  padding: 1px 7px;
+}
+
+.op {
+  font-size: clamp(34px, 10vw, 52px);
+  font-weight: 800;
+}
+.eq {
+  font-size: clamp(40px, 12vw, 64px);
+  font-weight: 800;
+}
+.hint {
+  width: 100%;
+  font-size: 0.85em;
+  color: var(--muted);
+}
+
+.opts {
+  display: grid;
+  grid-template-columns: repeat(var(--n, 4), minmax(0, 1fr));
+  gap: 10px;
+}
+@media (max-width: 480px) {
+  .opts[data-n="4"] { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+.opts.locked :global(.choice) { pointer-events: none; }
+
+@keyframes hop { 50% { transform: translateY(-14px) scale(1.2); } }

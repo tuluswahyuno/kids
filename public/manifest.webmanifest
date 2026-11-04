@@ -1,0 +1,19 @@
+{
+  "name": "Main Pintar — Game Belajar Anak TK",
+  "short_name": "Main Pintar",
+  "description": "Game belajar membaca, berhitung, dan mengingat untuk anak usia 4–7 tahun.",
+  "lang": "id",
+  "dir": "ltr",
+  "start_url": "/?source=pwa",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#fff7e6",
+  "theme_color": "#fff7e6",
+  "categories": ["education", "kids", "games"],
+  "icons": [
+    { "src": "/icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/icons/maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

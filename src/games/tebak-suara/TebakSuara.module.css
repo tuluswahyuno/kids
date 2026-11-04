@@ -1,0 +1,41 @@
+.mystery {
+  font-size: clamp(70px, 22vw, 110px);
+  line-height: 1;
+}
+.wave { animation: wave 1s infinite; }
+
+.soundText {
+  font-size: clamp(28px, 9vw, 46px);
+  font-weight: 800;
+  color: var(--accent);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.clue {
+  font-size: clamp(20px, 5.5vw, 28px);
+  font-weight: 800;
+}
+
+.replay {
+  background: var(--accent);
+  color: #fff;
+  padding: 12px 22px;
+}
+
+.novoice {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+}
+
+@keyframes wave {
+  0%, 100% { transform: rotate(-6deg); }
+  50% { transform: rotate(6deg) scale(1.08); }
+}
+
+@media (max-height: 520px) and (orientation: landscape) {
+  .mystery { font-size: min(22vh, 80px); }
+}

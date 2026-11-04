@@ -1,0 +1,52 @@
+.pic {
+  font-size: clamp(80px, 24vw, 120px);
+  line-height: 1.1;
+}
+
+.word {
+  font-size: clamp(20px, 6vw, 28px);
+  font-weight: 800;
+  color: var(--muted);
+}
+
+.big {
+  font-size: clamp(80px, 26vw, 130px);
+  line-height: 1;
+  font-weight: 800;
+  color: var(--accent);
+}
+
+.ask {
+  font-size: clamp(20px, 5.5vw, 28px);
+  font-weight: 800;
+}
+
+.replay {
+  background: var(--accent);
+  color: #fff;
+  padding: 12px 22px;
+  min-height: 48px;
+}
+
+.opt {
+  min-height: 84px;
+}
+
+/* gaya huruf berbeda untuk tingkat "Huruf Mirip" */
+.f0 { font-family: inherit; }
+.f1 { font-family: Georgia, "Times New Roman", serif; }
+.f2 { font-family: "Trebuchet MS", Verdana, sans-serif; font-style: italic; }
+
+.novoice {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+}
+
+@media (max-height: 520px) and (orientation: landscape) {
+  .pic { font-size: min(20vh, 80px); }
+  .big { font-size: min(24vh, 80px); }
+  .opt { min-height: 56px; }
+}

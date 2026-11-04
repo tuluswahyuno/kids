@@ -1,0 +1,78 @@
+.target {
+  color: var(--accent);
+  font-size: 1.5em;
+}
+
+.arena {
+  position: relative;
+  height: min(62vh, 520px);
+  height: min(62dvh, 520px);
+  min-height: 260px;
+  background: linear-gradient(#a5d8ff, #e7f5ff);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: inset 0 0 0 4px #fff;
+  touch-action: manipulation;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* tombol luar = bergerak (Web Animations); isi dalam = bentuk, goyang, dan letus */
+.balloon {
+  --bw: clamp(48px, min(17vw, calc((min(100vw, 720px) - 32px) / var(--n, 5) * 1.3)), 86px);
+  position: absolute;
+  bottom: -110px;
+  width: var(--bw);
+  height: calc(var(--bw) * 1.25);
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  will-change: transform;
+  touch-action: manipulation;
+}
+
+.body {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  border-radius: 50% 50% 50% 50% / 58% 58% 42% 42%;
+  color: #fff;
+  font-size: clamp(28px, 8vw, 42px);
+  font-weight: 800;
+  text-shadow: 0 2px 0 rgba(0, 0, 0, 0.25);
+  box-shadow: inset -8px -10px 0 rgba(0, 0, 0, 0.12), inset 8px 8px 0 rgba(255, 255, 255, 0.25);
+  transition: transform 0.2s, opacity 0.2s;
+}
+.body::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 100%;
+  width: 2px;
+  height: 26px;
+  background: rgba(0, 0, 0, 0.27);
+}
+.balloon:focus-visible .body {
+  outline: 4px solid #fff;
+  outline-offset: 3px;
+}
+
+.pop {
+  transform: scale(1.8);
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* dua nama animasi yang sama supaya goyangan bisa diulang pada balon yang sama */
+.wobA { animation: wobA 0.4s; }
+.wobB { animation: wobB 0.4s; }
+@keyframes wobA { 25% { translate: -10px 0; } 75% { translate: 10px 0; } }
+@keyframes wobB { 25% { translate: -10px 0; } 75% { translate: 10px 0; } }
+
+@media (max-height: 520px) and (orientation: landscape) {
+  .arena { height: min(52dvh, 300px); min-height: 180px; }
+}

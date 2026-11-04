@@ -1,0 +1,131 @@
+/* digandakan agar lebih spesifik daripada .stage global (kolom) */
+.board.board {
+  min-height: 130px;
+  width: 100%;
+}
+
+.word {
+  font-size: clamp(40px, 13vw, 68px);
+  font-weight: 800;
+  color: var(--accent);
+  text-transform: lowercase;
+  overflow-wrap: anywhere;
+}
+.bignum {
+  font-size: clamp(64px, 20vw, 96px);
+  font-weight: 800;
+  line-height: 1;
+  color: var(--accent);
+}
+
+.seq {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.tile {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 56px;
+  height: 64px;
+  padding: 0 8px;
+  border-radius: 14px;
+  background: var(--soft);
+  border: 3px solid var(--accent);
+  font-size: clamp(28px, 9vw, 44px);
+  font-weight: 800;
+}
+.hole {
+  background: #fff;
+  border-style: dashed;
+  color: var(--accent);
+}
+.arrow {
+  font-size: 1.8em;
+  font-weight: 800;
+  color: var(--muted);
+}
+
+/* pilihan kelompok benda */
+.groups {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 10px;
+}
+.lockd .group { pointer-events: none; }
+.group.group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  min-height: 72px;
+  padding: 8px 6px;
+  font-size: 22px;
+}
+.dots {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 3px;
+  font-size: 22px;
+  line-height: 1.15;
+  font-weight: 400;
+}
+.check {
+  font-size: 0.8em;
+  font-weight: 800;
+}
+
+/* urutkan angka */
+.hint {
+  font-weight: 800;
+  color: var(--muted);
+}
+.pool {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+.num.num {
+  min-width: 68px;
+  min-height: 64px;
+  padding: 8px 12px;
+  flex: 0 0 auto;
+}
+.used.used {
+  opacity: 0.35;
+  box-shadow: none;
+}
+.shake { animation: shake 0.4s; }
+.slots {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+}
+.slot {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 52px;
+  height: 52px;
+  border-radius: 12px;
+  border: 3px dashed var(--accent);
+  font-size: 26px;
+  font-weight: 800;
+}
+.filled {
+  border-style: solid;
+  background: var(--soft);
+}
+
+@keyframes shake {
+  20% { transform: translateX(-8px); }
+  40% { transform: translateX(8px); }
+  60% { transform: translateX(-6px); }
+  80% { transform: translateX(6px); }
+}

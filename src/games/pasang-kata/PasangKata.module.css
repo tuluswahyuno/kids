@@ -1,0 +1,62 @@
+.board {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px 40px;
+}
+@media (max-width: 420px) { .board { gap: 10px 14px; } }
+
+.col {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.pic,
+.word {
+  border: 4px solid transparent;
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  touch-action: manipulation;
+  height: clamp(70px, 16vh, 96px);
+  padding: 4px;
+  font: inherit;
+  color: inherit;
+  transition: transform 0.08s;
+}
+.pic { font-size: clamp(40px, 12vw, 64px); }
+.word {
+  font-size: clamp(16px, 4.6vw, 26px);
+  font-weight: 800;
+  text-transform: uppercase;
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+.pic:active,
+.word:active { transform: translateY(3px); box-shadow: var(--shadow-press); }
+
+.pick {
+  border-color: var(--accent);
+  background: var(--soft);
+  transform: scale(1.05);
+}
+.done {
+  border-color: var(--ok);
+  background: var(--ok-soft);
+  pointer-events: none;
+}
+.shake {
+  animation: shake 0.35s;
+  border-color: var(--bad);
+}
+
+@keyframes shake { 25% { translate: -8px 0; } 75% { translate: 8px 0; } }
+
+@media (max-height: 520px) and (orientation: landscape) {
+  .pic, .word { height: 56px; }
+  .pic { font-size: 34px; }
+}
